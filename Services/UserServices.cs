@@ -48,8 +48,8 @@ namespace Enjaz_StackOverFlow.Services
 
         public async Task<User> Login(LoginForm loginForm)
         {
-            var user = await ctx.Users.FirstOrDefaultAsync(u => u.Email == loginForm.email);
-            if (user == null || !BCrypt.Net.BCrypt.Verify(loginForm.password, user.Password))
+            var user_item = await ctx.Users.FirstOrDefaultAsync(u => u.Email == loginForm.email);
+            if (user_item == null || !BCrypt.Net.BCrypt.Verify(loginForm.password, user_item.Password))
                 return null;
             var tokenHandler = new JwtSecurityTokenHandler();
             var keyString = "kNpMKqse4DkJAEEFrbgsJ22iPfTpSr_KuX3RtE27nkroJridN6mQ2qbszI1ooG9GMJoFm1nUQJLpPN_OVCG_Nw";
@@ -58,9 +58,10 @@ namespace Enjaz_StackOverFlow.Services
             {
                 Subject = new ClaimsIdentity(new Claim[]
                 {
-                    new Claim("id", user.Id.ToString()),
-                    new Claim(ClaimTypes.Name, user.User_Name),
-                    new Claim(ClaimTypes.Role, user.Role),
+                    new Claim("id", user_item.Id.ToString()),
+                    new Claim("point", user_item.Point.ToString()),
+                     new Claim(ClaimTypes.Name, user_item.User_Name),
+                    new Claim(ClaimTypes.Role, user_item.Role),
 
 
                 }),
@@ -68,13 +69,13 @@ namespace Enjaz_StackOverFlow.Services
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };
             var token = tokenHandler.CreateToken(tokenDescriptor);
-            user.Token = tokenHandler.WriteToken(token);
+            user_item.Token = tokenHandler.WriteToken(token);
 
-            return user;
+            return user_item;
 
         }
 
-        public async Task<User> UpdateUser(int Id, User user)
+        public async Task<UpdateUserForm> UpdateUser(int Id, UpdateUserForm user)
         {
             var item = ctx.Users.Where(c => c.Id == Id).SingleOrDefault();
             _mapper.Map(user, item);

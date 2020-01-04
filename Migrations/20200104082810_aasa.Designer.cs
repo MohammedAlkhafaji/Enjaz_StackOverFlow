@@ -4,14 +4,16 @@ using Enjaz_StackOverFlow.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Enjaz_StackOverFlow.Migrations
 {
     [DbContext(typeof(Enjaz_Context))]
-    partial class Enjaz_ContextModelSnapshot : ModelSnapshot
+    [Migration("20200104082810_aasa")]
+    partial class aasa
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

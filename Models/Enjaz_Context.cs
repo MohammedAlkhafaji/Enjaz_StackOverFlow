@@ -8,7 +8,9 @@ namespace Enjaz_StackOverFlow.Models
 {
     public class Enjaz_Context : DbContext
     {
-        public Enjaz_Context(DbContextOptions dbContextOptions ):base(dbContextOptions)
+ 
+        public Enjaz_Context(DbContextOptions dbContextOptions )
+            :base(dbContextOptions)
         {
              
         }
@@ -28,7 +30,7 @@ namespace Enjaz_StackOverFlow.Models
         //{
         //    if (!optionsBuilder.IsConfigured)
         //    {
-        //        optionsBuilder.UseSqlServer("Data Source=.;Initial Catalog=DB_Enjaz_StackOverFlow;Persist Security Info=True");
+        //        optionsBuilder.UseSqlServer("Data Source=.;Initial Catalog=DB_Enjaz_StackOverFlow;Integrated Security=True");
         //    }
         //}
 

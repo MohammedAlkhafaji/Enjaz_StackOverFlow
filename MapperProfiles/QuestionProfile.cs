@@ -13,13 +13,13 @@ namespace Enjaz_StackOverFlow.MapperProfiles
         public QuestionProfile()
         {
             CreateMap<Question, Question>()
- 
-        .ForAllMembers(opt => opt.Condition(
-           (src, dest, srcMember) => srcMember != null)
-        );
+
+            .ForAllMembers(opt => opt.Condition(
+               (src, dest, srcMember) => srcMember != null)
+            );
 
 
-            CreateMap<QuestionForm, Question >()
+            CreateMap<QuestionForm, Question>()
         .ForAllMembers(opt => opt.Condition(
           (src, dest, srcMember) => srcMember != null)
         );

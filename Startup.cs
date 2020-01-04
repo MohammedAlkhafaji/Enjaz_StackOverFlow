@@ -42,6 +42,7 @@ namespace Enjaz_StackOverFlow
             services.AddDbContext<Enjaz_Context>(x => x.UseSqlServer(Configuration.GetConnectionString("Connection")));
             services.AddScoped<IUserService, UserServices>();
             services.AddScoped<IQuestionService, QuestionService>();
+            services.AddScoped<ICommentService, CommentService>();
             services.AddAutoMapper(typeof(Startup));
             services.AddSwaggerGen(c =>
             {
@@ -136,10 +137,10 @@ namespace Enjaz_StackOverFlow
             });
 
             app.UseRouting();
+          //  app.UseCors();
 
+            app.UseAuthentication();
             app.UseAuthorization();
-            app.UseAuthorization();
-
 
 
             app.UseEndpoints(endpoints =>

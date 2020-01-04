@@ -4,14 +4,16 @@ using Enjaz_StackOverFlow.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Enjaz_StackOverFlow.Migrations
 {
     [DbContext(typeof(Enjaz_Context))]
-    partial class Enjaz_ContextModelSnapshot : ModelSnapshot
+    [Migration("20200103162339_ssssss")]
+    partial class ssssss
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -112,8 +114,8 @@ namespace Enjaz_StackOverFlow.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Evaluation")
-                        .HasColumnType("int");
+                    b.Property<string>("Evaluation")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("Question_Date")
                         .HasColumnType("datetime2");

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.SignalR;
+﻿using Enjaz_StackOverFlow.Models;
+using Microsoft.AspNetCore.SignalR;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,9 +9,11 @@ namespace Enjaz_StackOverFlow.Hubs
 {
     public class ApiHub:Hub
     {
-        public async Task SendMessage(string user, string message)
+
+
+        public Task SendComment(int question_id, Comment comment  )
         {
-            await Clients.All.SendAsync("ReceiveMessage", user, message);
+            return Clients.All .SendAsync("question_" + question_id, Newtonsoft.Json.JsonConvert.SerializeObject(comment));
         }
     }
 }

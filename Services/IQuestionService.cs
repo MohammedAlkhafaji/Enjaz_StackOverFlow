@@ -1,4 +1,5 @@
-﻿using Enjaz_StackOverFlow.Models;
+﻿using Enjaz_StackOverFlow.Dtos;
+using Enjaz_StackOverFlow.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,13 +10,14 @@ namespace Enjaz_StackOverFlow.Services
     public interface IQuestionService
     {
 
-        Task<Question>AddQuestion(Question question);
+        Task<Question>AddQuestion(int user_point, Question question);
 
         Task< IEnumerable<Question>> GetQuestions();
         
-        Task<Question> UpdateQuestion(int Id_Question, Question question);
+        Task<QuestionForm> UpdateQuestion(int id_question,int id_user, QuestionForm question);
 
         Task<IEnumerable<Question>> SearchQuestion(string Search);
+
         Task<Question> GetQuestionById(int id);
     }
 }

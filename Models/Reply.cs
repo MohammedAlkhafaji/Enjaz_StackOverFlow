@@ -12,7 +12,7 @@ namespace Enjaz_StackOverFlow.Models
         public int User_Id { get; set; }
         public int Comment_Id { get; set; }
         public DateTime Question_Date { get; set; }
-        public string Evaluation { get; set; }
+        public int Evaluation { get; set; }
         public int Question_Id { get; set; }
 
 

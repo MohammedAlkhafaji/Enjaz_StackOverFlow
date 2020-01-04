@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -13,7 +14,11 @@ namespace Enjaz_StackOverFlow.Models
     public class User
     {
 
-
+        public User()
+        {
+            Point = 5;
+            Role = "User";
+        }
 
 
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -27,9 +32,10 @@ namespace Enjaz_StackOverFlow.Models
         public string Email { get; set; }
         public byte[] Profile_Picture { get; set; }
         public DateTime Creation_Date { get; set; }
-        public int Point { get; set; }
+        public int Point { get; set; } 
         [NotMapped]
         public string Token { get; set; }
         public string Role { get; set; }
+     
     }
 }

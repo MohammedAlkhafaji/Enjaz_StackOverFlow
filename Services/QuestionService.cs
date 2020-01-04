@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using Enjaz_StackOverFlow.Dtos;
 using Enjaz_StackOverFlow.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -21,11 +22,19 @@ namespace Enjaz_StackOverFlow.Services
         }
 
 
-        public async Task<Question> AddQuestion(Question question)
+        public async Task<Question> AddQuestion(int user_point, Question question)
         {
-            await ctx.Questions .AddAsync(question);
-            await ctx.SaveChangesAsync();
-            return question;
+            if (user_point >= 5)
+            {
+                await ctx.Questions.AddAsync(question);
+                await ctx.SaveChangesAsync();
+
+                return question;
+            }
+            else
+            {
+                return null;
+            }
         }
 
         public async  Task<IEnumerable<Question>> GetQuestions()
@@ -33,21 +42,29 @@ namespace Enjaz_StackOverFlow.Services
             return await ctx.Questions.Include(q=>q.question_Histories).ToListAsync();
         }
 
-        public async  Task<Question> UpdateQuestion(int Id_Question, Question question)
+        public async  Task<QuestionForm> UpdateQuestion(int id_question,int id_user, QuestionForm question)
         {
     
-             var item = ctx.Questions.Where(c => c.Id == Id_Question).SingleOrDefault();
+
+             var item = ctx.Questions.Where(c => c.Id == id_question   && c.User_Id==id_user ).SingleOrDefault();
+            if (item == null) return null;
+
+            _mapper.Map(question, item);
+
+
             Question_History qh = new Question_History
             {
                 Before_Edit = item.Description,
                 After_Edit = question.Description,
-                Edit_DateTime = DateTime.Now
+                Edit_DateTime = DateTime.Now,
+                Qustion_Id=id_question
+      
             };
             item.question_Histories.Add(qh);
-            _mapper.Map(question , item);
+         
 
             await ctx.SaveChangesAsync();
-            return question ;
+            return question  ;
         }
 
 

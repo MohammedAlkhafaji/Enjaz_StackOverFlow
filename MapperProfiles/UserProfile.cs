@@ -1,10 +1,7 @@
 ﻿using AutoMapper;
 using Enjaz_StackOverFlow.Dtos;
 using Enjaz_StackOverFlow.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+ 
 
 namespace Enjaz_StackOverFlow.MapperProfiles
 {
@@ -23,6 +20,11 @@ namespace Enjaz_StackOverFlow.MapperProfiles
     .ForAllMembers(opt => opt.Condition(
        (src, dest, srcMember) => srcMember != null)
     );
+
+            CreateMap<UpdateUserForm, User>()
+.ForAllMembers(opt => opt.Condition(
+(src, dest, srcMember) => srcMember != null)
+);
 
         }
 

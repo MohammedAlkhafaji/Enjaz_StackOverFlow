@@ -37,10 +37,11 @@ namespace Enjaz_StackOverFlow.Controllers.Api
             return Ok(await _userService.Getall());
         }
         [HttpGet("GetUserPoint")]
-        public async Task<ActionResult<IEnumerable<User>>> GetUserPoint(Int32 User_Id)
+        public async Task<ActionResult<IEnumerable<User>>> GetUserPoint()
         {
+            var Id = Convert.ToInt32(GetClaim("id"));
 
-            return Ok(await _userService.GetUserPoint(User_Id));
+            return Ok(await _userService.GetUserPoint(Id));
         }
 
 
@@ -57,8 +58,9 @@ namespace Enjaz_StackOverFlow.Controllers.Api
 
         [HttpPut("UpdateUser")]
        
-        public async Task<ActionResult<User>> UpdateUser(int Id, User user)
+        public async Task<ActionResult<User>> UpdateUser(UpdateUserForm user)
         {
+            var Id = Convert.ToInt32(GetClaim("id"));
             user = await _userService.UpdateUser(Id, user);
             return Ok(user);
 

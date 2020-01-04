@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Enjaz_StackOverFlow.Dtos;
 using Enjaz_StackOverFlow.Models;
 using Enjaz_StackOverFlow.Services;
 using Microsoft.AspNetCore.Authorization;
@@ -26,23 +27,23 @@ namespace Enjaz_StackOverFlow.Controllers.Api
 
         [HttpPost("AddQuestion")]
 
-        public async Task<ActionResult<Question>> AddUser(Question question)
+        public async Task<ActionResult<Question>> AddQuestion(Question question)
         {
-            question = await _questionService.AddQuestion(question);
+            var point_user = Int32.Parse(GetClaim("point"));
+            question = await _questionService.AddQuestion(point_user, question);
             return Ok(question);
 
-        }
+        } 
 
-       [Authorize(Roles ="MM")]
+     //   [Authorize(Roles ="MM")]
         [HttpPut("UpdateQuestion")]
-        public async Task<ActionResult<Question>> UpdateQuestion(int Id, Question question)
+        public async Task<ActionResult<Question>> UpdateQuestion(int Id_Question, QuestionForm question)
         {
-            var accessToken = Request.Headers["Authorization"];
+         //   var accessToken = Request.Headers["Authorization"];
 
-            var userIdString = GetClaim("id");
-            var userId =int.Parse(userIdString);
-            question = await _questionService.UpdateQuestion(Id, question);
-            return Ok(question);
+            var UserId= Convert.ToInt32( GetClaim("id"));
+         
+            return Ok(await _questionService.UpdateQuestion(Id_Question, UserId, question));
         }
  
 
